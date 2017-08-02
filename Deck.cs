@@ -10,11 +10,12 @@ namespace DeckOfCards
         // // }
         // // Del next = test;
 
-        protected Suit[] standardSuits = { new Suit("Red", ConsoleColor.Black, ConsoleColor.DarkRed),
-                                       new Suit("Yellow", ConsoleColor.Black, ConsoleColor.DarkYellow),
+        public static Suit[] standardSuits = { new Suit("Blue", ConsoleColor.Black, ConsoleColor.DarkBlue),
                                        new Suit("Green", ConsoleColor.Black, ConsoleColor.DarkGreen),
-                                       new Suit("Blue", ConsoleColor.Black, ConsoleColor.DarkBlue) };
-        protected Rank[] standardRanks = { new Rank("0", 0),
+                                       new Suit("Red", ConsoleColor.Black, ConsoleColor.DarkRed),
+                                       new Suit("Yellow", ConsoleColor.Black, ConsoleColor.DarkYellow),
+                                        };
+        protected static Rank[] standardRanks = { new Rank("0", 0),
                                                 new Rank("1", 1),
                                                new Rank( "2", 2),
                                                new Rank( "3", 3),
@@ -41,15 +42,15 @@ namespace DeckOfCards
                                         new Rank( "Reverse", 11),
                                         new Rank( "Draw 2", 12)};
 
-        protected Suit[] wildSuits = { new Suit("Wild", ConsoleColor.White, ConsoleColor.Black), };
-        protected static Rank[] wildRanks = { new Rank("", 1),
-                                               new Rank("", 1),
-                                               new Rank("", 1),
-                                               new Rank("", 1),
-                                               new Rank("Draw 4",2),
-                                               new Rank("Draw 4",2),
-                                               new Rank("Draw 4", 2),
-                                               new Rank("Draw 4",2),
+        protected Suit[] wildSuits = { new Suit("", ConsoleColor.White, ConsoleColor.Black), };
+        protected static Rank[] wildRanks = { new Rank("Wild", 100),
+                                               new Rank("Wild", 100),
+                                               new Rank("Wild", 100),
+                                               new Rank("Wild", 100),
+                                               new Rank("Wild Draw 4",200),
+                                               new Rank("Wild Draw 4",200),
+                                               new Rank("Wild Draw 4", 200),
+                                               new Rank("Wild Draw 4",200),
                                               };
 
         public static List<CardGroup> cardGroups = new List<CardGroup>();

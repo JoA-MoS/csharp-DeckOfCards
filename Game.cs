@@ -11,6 +11,8 @@ namespace DeckOfCards
         public BaseCardSet table = new BaseCardSet();
         public int direction = 1;
 
+        private int turns = 1;
+
 
 
 
@@ -28,8 +30,8 @@ namespace DeckOfCards
                 p.Order();
             }
 
-            table.draw(main);
 
+            
 
         }
 
@@ -42,18 +44,43 @@ namespace DeckOfCards
             if (choice > 0)
             {
                 player.GiveCard(choice - 1, table);
-                if (!(table.TopCard.rank.value == table.cards[table.Count - 2].rank.value || table.TopCard.suit.name == table.cards[table.Count - 2].suit.name))
+                if (table.TopCard.rank.value >= 100)
                 {
-                    player.draw(table);
-                    player.Order();
-                    Console.WriteLine("You cant play that card silly - Press enter to continue");
-                    Console.ReadLine();
+                    // 200 is the value of draw 4
+                    if(table.TopCard.rank.value==200){
+                        Player nextPlayer = players[Math.Abs((turns + direction) % players.Count)];
+                        nextPlayer.draw(main, 4);
+                        System.Console.WriteLine($"----------{nextPlayer.name} Drawing 4 cards ------");
+                        System.Threading.Thread.Sleep(3000);
+                        nextPlayer.Order();
+                    }
+                    System.Console.WriteLine("1: Blue");
+                    System.Console.WriteLine("2: Green");
+                    System.Console.WriteLine("3: Red");
+                    System.Console.WriteLine("4: Yellow");
+                    System.Console.WriteLine("What color do you want?");
+                    int colorChoice = int.Parse(Console.ReadLine());
 
-                    Turn(player);
-                }
-                if (table.TopCard.rank.name == "Skip") {
+                    table.TopCard.suit = Deck.standardSuits[colorChoice-1];
+
+
                     
                 }
+                else
+                {
+                    if (!(table.TopCard.rank.value == table.cards[table.Count - 2].rank.value ||
+                            table.TopCard.suit.name == table.cards[table.Count - 2].suit.name))
+                    {
+                        player.draw(table);
+                        player.Order();
+                        Console.WriteLine("You cant play that card silly - Press enter to continue");
+                        Console.ReadLine();
+
+                        Turn(player);
+                    }
+                    SpecialCards();
+                }
+
             }
             else
             {
@@ -63,7 +90,35 @@ namespace DeckOfCards
             }
         }
 
+        private void SpecialCards(bool useNext=true)
+        {
+            if (table.TopCard.rank.name == "Skip")
+            {
+                System.Console.WriteLine($"---------- Next Player Skipped ------");
+                System.Threading.Thread.Sleep(3000);
+                turns += direction;
+            }
+            if (table.TopCard.rank.name == "Reverse")
+            {
+                System.Console.WriteLine($"---------- Game Direction Reversed ------");
+                System.Threading.Thread.Sleep(3000);
+                direction = -1;
+            }
+            if (table.TopCard.rank.name == "Draw 2")
+            {
+                Player nextPlayer = new Player();
+                if(useNext){
+                    nextPlayer = players[Math.Abs((turns + direction) % players.Count)];
+                }else{
+                    nextPlayer = players[Math.Abs((turns) % players.Count)];
+                }
 
+                nextPlayer.draw(main, 2);
+                System.Console.WriteLine($"----------{nextPlayer.name} Drawing 2 cards ------");
+                System.Threading.Thread.Sleep(3000);
+                nextPlayer.Order();
+            }
+        }
 
         public void ShowTable()
         {
@@ -76,12 +131,19 @@ namespace DeckOfCards
 
         public void Play()
         {
-            int turns = 0;
+            table.draw(main);
+            while(table.TopCard.rank.value >= 100)
+            {
+                main.draw(table);
+                main.shuffle();
+                table.draw(main);
+            }
+            SpecialCards();
+
             while (!haveWinner())
             {
-                System.Console.WriteLine(turns % players.Count);
-                Turn(players[turns % players.Count]);
-                turns++;
+                Turn(players[Math.Abs(turns % players.Count)]);
+                turns += direction;
             }
             Player winner = players.Where(x => x.Count == 0).Single();
             System.Console.WriteLine($"!!!!!!!!!!!!!  {winner.name} WINS  !!!!!!!!!!!!!");

@@ -5,6 +5,11 @@ namespace DeckOfCards
         public string name;
         // hand = cards from Abstrace Base Class
 
+        public Player()
+        {
+
+        }
+
         public Player(string name)
         {
             this.name = name;
