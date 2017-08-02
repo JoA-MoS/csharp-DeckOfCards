@@ -141,6 +141,7 @@ namespace DeckOfCards
         public void Play()
         {
             table.draw(main);
+            //table.cards.Add(new Card(Deck.standardSuits[0], new Rank("Reverse",12)));
             while(table.TopCard.rank.value >= 100)
             {
                 main.draw(table);
