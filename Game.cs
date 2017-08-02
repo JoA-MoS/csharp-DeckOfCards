@@ -54,11 +54,19 @@ namespace DeckOfCards
                         System.Threading.Thread.Sleep(3000);
                         nextPlayer.Order();
                     }
+                    Console.WriteLine("What color do you want?");
+                   
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
                     System.Console.WriteLine("1: Blue");
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
                     System.Console.WriteLine("2: Green");
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
                     System.Console.WriteLine("3: Red");
+                    Console.BackgroundColor = ConsoleColor.DarkYellow;
                     System.Console.WriteLine("4: Yellow");
-                    System.Console.WriteLine("What color do you want?");
+                    Console.ResetColor();
+                    
                     int colorChoice = int.Parse(Console.ReadLine());
 
                     table.TopCard.suit = Deck.standardSuits[colorChoice-1];
@@ -154,11 +162,9 @@ namespace DeckOfCards
             bool cont = false;
             foreach (Player player in players)
             {
-                System.Console.WriteLine("Card Count " + player.cards.Count);
                 cont = cont || player.cards.Count == 0;
                 // System.Console.WriteLine(player.Count);
             }
-            System.Console.WriteLine(cont);
             return cont;
         }
     }
