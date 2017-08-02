@@ -19,6 +19,8 @@ namespace DeckOfCards
         public void Show(){
             System.Console.WriteLine($"=================={name}=================\r\n");
             base.Show();
+            System.Console.WriteLine($"-----------------------------------------\r\n");
+            System.Console.WriteLine($"0: Draw a card\r\n");
         }
     }
 }

@@ -57,8 +57,8 @@ namespace DeckOfCards
 
         public List<Card> draw(BaseCardSet source, int number = 1)
         {
-            List<Card> deltCards = source.cards.GetRange(0, number);
-            source.cards.RemoveRange(0, number);
+            List<Card> deltCards = source.cards.GetRange((source.cards.Count-1)-number, number);
+            source.cards.RemoveRange((source.cards.Count-1)-number, number);
             cards.AddRange(deltCards);
             return deltCards;
         }
@@ -66,8 +66,8 @@ namespace DeckOfCards
 
         public Card draw(BaseCardSet source)
         {
-            Card card = source.cards[0];
-            source.cards.RemoveAt(0);
+            Card card = source.cards.Last();
+            source.cards.RemoveAt(source.cards.Count-1);
             cards.Add(card);
             return card;
         }

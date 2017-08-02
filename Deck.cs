@@ -5,6 +5,11 @@ namespace DeckOfCards
 {
     public class Deck : BaseCardSet
     {
+        // public static void test(){
+        //     System.Console.WriteLine("Testing");
+        // // }
+        // // Del next = test;
+
         protected Suit[] standardSuits = { new Suit("Red", ConsoleColor.Black, ConsoleColor.DarkRed),
                                        new Suit("Yellow", ConsoleColor.Black, ConsoleColor.DarkYellow),
                                        new Suit("Green", ConsoleColor.Black, ConsoleColor.DarkGreen),
