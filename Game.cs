@@ -110,8 +110,8 @@ namespace DeckOfCards
             {
                 System.Console.WriteLine($"---------- Game Direction Reversed ------");
                 System.Threading.Thread.Sleep(3000);
-                //direction = -1;
-                players.Reverse();
+                direction = -1;
+                // players.Reverse();
             }
             if (table.TopCard.rank.name == "Draw 2")
             {
@@ -148,7 +148,7 @@ namespace DeckOfCards
                 main.shuffle();
                 table.draw(main);
             }
-            SpecialCards();
+            SpecialCards(false);
 
             while (!haveWinner())
             {

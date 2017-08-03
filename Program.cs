@@ -19,8 +19,7 @@ namespace DeckOfCards
 
 
             Game uno = new Game(playerNames.ToArray());
-    
-            // uno.Turn(uno.players[0]);
+
             uno.Play();
             
 
